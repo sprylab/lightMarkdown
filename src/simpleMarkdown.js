@@ -142,7 +142,7 @@ simpleMarkdown.toHtml = function (md) {
             doubleLineIndexes.push({
                 start: m.index,
                 length: m[0].length,
-                blockqoute: m[0]
+                suffix: m[0]
             });
         }
         doubleLineIndexes.push({
@@ -160,12 +160,10 @@ simpleMarkdown.toHtml = function (md) {
             var paragraph = '';
             var paragraphContent = md.substring(startIndex, doubleLine.start);
             if (paragraphContent) {
-                paragraph += '<p>';
-                paragraph += paragraphContent;
-                paragraph += '</p>';
+                paragraph = '<p>' + paragraphContent + '</p>';
             }
-            if (doubleLine.blockqoute) {
-                paragraph += doubleLine.blockqoute;
+            if (doubleLine.suffix) {
+                paragraph += doubleLine.suffix;
             }
             withParagraphs += paragraph;
             startIndex = doubleLine.start + doubleLine.length;
