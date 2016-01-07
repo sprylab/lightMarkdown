@@ -98,7 +98,7 @@ module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('test', ['clean', 'jshint', 'concat:test', 'simplemocha']);
+    grunt.registerTask('test', ['clean', 'jshint', 'concat:test', 'simplemocha', 'clean']);
     grunt.registerTask('build', ['test', 'concat:dist', 'uglify', 'endline']);
     grunt.registerTask('prep-release', ['build', 'conventionalChangelog']);
 
