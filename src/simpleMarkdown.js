@@ -138,27 +138,36 @@ simpleMarkdown.toHtml = function (md) {
                 length: m[0].length
             });
         }
+        while ((m = regex.blockquoteTags.exec(md))) {
+            doubleLineIndexes.push({
+                start: m.index,
+                length: m[0].length,
+                blockqoute: m[0]
+            });
+        }
         doubleLineIndexes.push({
             start: md.length,
             length: 0
         });
 
+        doubleLineIndexes.sort(function (a, b) {
+            return a.start - b.start;
+        });
+
         var withParagraphs = '';
         var startIndex = 0;
         doubleLineIndexes.forEach(function (doubleLine) {
-            var blockStartIndex = md.indexOf('<blockquote>', startIndex); //12
-            var blockEndIndex = md.indexOf('</blockquote>', startIndex);//13
-            var paragraphs;
-            if (blockStartIndex !== -1 && blockStartIndex < doubleLine.start) {
-                paragraphs = md.substring(startIndex, blockStartIndex + 12) + '<p>' + md.substring(blockStartIndex + 12, doubleLine.start) + '</p>';
+            var paragraph = '';
+            var paragraphContent = md.substring(startIndex, doubleLine.start);
+            if (paragraphContent) {
+                paragraph += '<p>';
+                paragraph += paragraphContent;
+                paragraph += '</p>';
             }
-            else if (blockEndIndex !== -1 && blockEndIndex < doubleLine.start) {
-                paragraphs = '<p>' + md.substring(startIndex, blockEndIndex) + '</p>' + md.substring(blockEndIndex, doubleLine.start);
+            if (doubleLine.blockqoute) {
+                paragraph += doubleLine.blockqoute;
             }
-            else {
-                paragraphs = '<p>' + md.substring(startIndex, doubleLine.start) + '</p>';
-            }
-            withParagraphs += paragraphs;
+            withParagraphs += paragraph;
             startIndex = doubleLine.start + doubleLine.length;
         });
         md = withParagraphs;
@@ -196,7 +205,7 @@ function getRegex(tokens) {
     var multilineQuoteRegex = /(^|\n)&gt;&gt;&gt;([\s\S]*$)/;
 
     // Single line quote > or sequential lines that start with >.
-    var singleLineQuoteRegex = /(^|\n)&gt;(([^\n]*)(\n&gt;[^\n]*)*)\n/g;
+    var singleLineQuoteRegex = /(^|\n)&gt;(([^\n]*)(\n&gt;[^\n]*)*)/g;
 
     // Two new lines in a row
     var doubleLineBreakRegex = /\r?\n\r?\n\r?/g;
@@ -211,6 +220,7 @@ function getRegex(tokens) {
         nonTokensChars: nonTokensCharsRegex,
         multilineQuote: multilineQuoteRegex,
         singleLineQuote: singleLineQuoteRegex,
+        blockquoteTags: /<\/?blockquote>/ig,
         doubleLineBreak: doubleLineBreakRegex,
         singleLineBreak: singleLineBreakRegex,
         url: urlRegex
