@@ -16,7 +16,7 @@ module.exports = function (grunt) {
                 src: [
                     'src/tokens.js',
                     'src/regex.js',
-                    'src/simpleMarkdown.js',
+                    'src/lightMarkdown.js',
                     'src/loader.js'
                 ],
                 dest: 'dist/<%= pkg.name %>.js'

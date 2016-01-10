@@ -6,7 +6,7 @@
 var path = require('path');
 var fs = require('fs');
 require('chai').should();
-var simpleMarkdown = require('../.build/simple-markdown.js');
+var lightMarkdown = require('../.build/light-markdown.js');
 
 
 var casesDir = path.join(__dirname, 'cases');
@@ -30,10 +30,10 @@ var testCases = fs.readdirSync(casesDir)
         return file;
     });
 
-describe('Simple Markdown', function () {
+describe('Light Markdown', function () {
     testCases.forEach(function (testCase) {
         it(testCase.name, function () {
-            var actualHtml = simpleMarkdown.toHtml(testCase.smd);
+            var actualHtml = lightMarkdown.toHtml(testCase.smd);
             actualHtml.should.equal(testCase.expectedHtml);
         });
     });

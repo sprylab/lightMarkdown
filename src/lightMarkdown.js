@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var simpleMarkdown = {},
+var lightMarkdown = {},
     tokens = getTokens(),
     regex = getRegex(tokens),
     plainToken = '₪₪PLaiN₪₪',
@@ -40,9 +40,9 @@ var simpleMarkdown = {},
  * @static
  * @param {string} key
  * @param {*} value
- * @returns {simpleMarkdown}
+ * @returns {lightMarkdown}
  */
-simpleMarkdown.setOption = function (key, value) {
+lightMarkdown.setOption = function (key, value) {
     options[key] = !!value;
     return this;
 };
@@ -53,12 +53,12 @@ simpleMarkdown.setOption = function (key, value) {
  * @param {string} key
  * @returns {*}
  */
-simpleMarkdown.getOption = function (key) {
+lightMarkdown.getOption = function (key) {
     return options[key];
 };
 
 
-simpleMarkdown.setFlavor = function (flavorName) {
+lightMarkdown.setFlavor = function (flavorName) {
     var flavor = flavors[flavorName];
     if (flavor) {
         for (var option in flavor) {
@@ -71,7 +71,7 @@ simpleMarkdown.setFlavor = function (flavorName) {
 };
 
 
-simpleMarkdown.toHtml = function (md) {
+lightMarkdown.toHtml = function (md) {
     md = escapeHtml(md);
     var plains = [];
 
@@ -251,4 +251,4 @@ function getTokens() {
     return tokens;
 }
 
-simpleMarkdown.setFlavor('slack');
+lightMarkdown.setFlavor('slack');

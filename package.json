@@ -1,26 +1,26 @@
 {
-  "name": "simple-markdown",
+  "name": "light-markdown",
   "version": "0.1.1",
   "description": "Javascript library that helps you convert simplified markdown (like used in Slack messages) to HTML",
-  "main": "dist/simple-markdown.js",
+  "main": "dist/light-markdown.js",
   "scripts": {
     "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tonkean/simpleMarkdown.git"
+    "url": "git+https://github.com/Tonkean/lightMarkdown.git"
   },
   "keywords": [
-    "simple",
+    "light",
     "markdown",
     "slack"
   ],
   "author": "ShaLi Shaltiel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Tonkean/simpleMarkdown/issues"
+    "url": "https://github.com/Tonkean/lightMarkdown/issues"
   },
-  "homepage": "https://github.com/Tonkean/simpleMarkdown#readme",
+  "homepage": "https://github.com/Tonkean/lightMarkdown#readme",
   "devDependencies": {
     "chai": "^1.10.0",
     "grunt": "^0.4.5",
