@@ -12,7 +12,7 @@ var lightMarkdown = require('../.build/light-markdown.js');
 var casesDir = path.join(__dirname, 'cases');
 var testCases = fs.readdirSync(casesDir)
     .map(function (file) {
-        var fileExtIndex = file.indexOf('.smd');
+        var fileExtIndex = file.indexOf('.lmd');
         var filePath = path.join(casesDir, file);
         if (fileExtIndex !== -1 && fs.statSync(filePath).isFile()) {
             var testName = file.substring(0, fileExtIndex);
@@ -20,7 +20,7 @@ var testCases = fs.readdirSync(casesDir)
             if (fs.existsSync(matchingHtmlFile) && fs.statSync(matchingHtmlFile).isFile()) {
                 return {
                     name: testName.replace(/-/g, ' '),
-                    smd: fs.readFileSync(filePath, 'utf-8'),
+                    lmd: fs.readFileSync(filePath, 'utf-8'),
                     expectedHtml: fs.readFileSync(matchingHtmlFile, 'utf-8')
                 };
             }
@@ -33,7 +33,7 @@ var testCases = fs.readdirSync(casesDir)
 describe('Light Markdown', function () {
     testCases.forEach(function (testCase) {
         it(testCase.name, function () {
-            var actualHtml = lightMarkdown.toHtml(testCase.smd);
+            var actualHtml = lightMarkdown.toHtml(testCase.lmd);
             actualHtml.should.equal(testCase.expectedHtml);
         });
     });
