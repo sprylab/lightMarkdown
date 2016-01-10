@@ -26,3 +26,26 @@ You can also use one of several CDNs available:
 * github CDN
 
         https://cdn.rawgit.com/Tonkean/lightMarkdown/<version tag>/dist/light-markdown.min.js
+
+## Quick Example
+
+### Node
+
+```js
+var light-markdown  = require('light-markdown'),
+    text      = 'This should be *bold*',
+    html      = light-markdown.toHtml(text);
+```
+
+### Browser
+
+```js
+    text      = 'This should be *bold*',
+    html      = light-markdown.toHtml(text);
+```
+
+### Output 
+
+Both examples should output...
+
+    <p>This should be <b>bold</b></p>
