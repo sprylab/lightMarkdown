@@ -1,4 +1,4 @@
-;/*! light-markdown 10-01-2016 */
+;/*! light-markdown 18-10-2017 */
 (function(){
 /**
  * Created by ShaLi on 07/01/2016.
@@ -124,7 +124,10 @@ lightMarkdown.toHtml = function (md) {
     if (options.autoLink) {
         // Replace links
         md = md.replace(regex.url, function (match, g1, g2) {
-            return g1 + '<a href="' + g2 + '" target="_blank">' + g2 + '</a>';
+            if (!g2) {
+                g2 = g1;
+            }
+            return '<a href="' + g1 + '" target="_blank">' + g2 + '</a>';
         });
     }
 
@@ -213,8 +216,7 @@ function getRegex(tokens) {
     // Single line break
     var singleLineBreakRegex = /\r?\n\r?/g;
 
-    // From https://gist.github.com/dperini/729294
-    var urlRegex = /(^|\s)((?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?)/gi;
+    var urlRegex = /&lt;((?:https?|ftp|mailto).*?)(?:\|(.*?(?=&gt;)))?&gt;/gi;
 
     return {
         nonTokensChars: nonTokensCharsRegex,
