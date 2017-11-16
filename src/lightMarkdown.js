@@ -236,9 +236,9 @@ function getTokens() {
     var tokens = [
         {name: 'pre', token: '```', elementName: 'pre', multiline: true, plainContent: true},
         {name: 'code', token: '`', elementName: 'code', ignoreAfter: true, plainContent: true},
-        {name: 'bold', token: '*', elementName: 'b', requireNonTokens: true, spaceWrapIgnored: true},
-        {name: 'italics', token: '_', elementName: 'i', requireNonTokens: true},
-        {name: 'strikethrough', token: '~', elementName: 's', requireNonTokens: true, spaceWrapIgnored: true}
+        {name: 'bold', token: '*', elementName: 'b', ignoreAfter: true, requireNonTokens: true, spaceWrapIgnored: true},
+        {name: 'italics', token: '_', elementName: 'i', ignoreAfter: true, requireNonTokens: true},
+        {name: 'strikethrough', token: '~', elementName: 's', ignoreAfter: true, requireNonTokens: true, spaceWrapIgnored: true}
     ];
     tokens.forEach(function (t) {
         if (!t.regex) {

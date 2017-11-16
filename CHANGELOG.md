@@ -1,3 +1,8 @@
+<a name="0.1.4"></a>
+## 0.1.4 (2017-11-16)
+
+* No need for whitespace after *bold*, _italics_ and ~strikethrough~
+
 <a name="0.1.3"></a>
 ## 0.1.3 (2017-10-18)
 
